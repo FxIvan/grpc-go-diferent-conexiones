@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	port = ":8080"
+	port = ":50410"
 )
 
 type helloServer struct {
@@ -17,7 +17,7 @@ type helloServer struct {
 }
 
 func main() {
-	list, err := net.Listen("tcp", port)
+	list, err := net.Listen("tcp", "0.0.0.0"+port)
 	if err != nil {
 		log.Fatalf("Failed to start server %v", err)
 	}

@@ -9,22 +9,22 @@ import (
 )
 
 const (
-	port = ":8080"
+	port = ":50410"
 )
 
 func main() {
-	conn, err := grpc.Dial("localhost"+port, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial("localhost"+port, grpc.WithTransportCredentials(insecure.NewCredentials())) //WithTransportCredentials(insecure.NewCredentials())
 	if err != nil {
 		log.Fatalf("Failed to connect: %v", err)
 	}
-
 	defer conn.Close()
 
 	client := pb.NewGreetServiceClient(conn)
 
-	//names := &pb.NameList{
-	//	Names: []string{"Ivan","Tila","Jorge","Lourdes"},
-	//}
+	names := &pb.NameList{
+		Names: []string{"Ivan", "Tila", "Jorge", "Lourdes"},
+	}
 
-	callSayHello(client)
+	//callSayHello(client)
+	callSayHelloServerStream(client, names)
 }
