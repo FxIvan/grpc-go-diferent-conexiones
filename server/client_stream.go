@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"log"
 
 	pb "github.com/fxivan/go-grpc-akhil/proto"
 )
@@ -19,7 +20,7 @@ func (s *helloServer) SayHelloClientStreaming(stream pb.GreetService_SayHelloCli
 		if err != nil {
 			return err
 		}
-
+		log.Printf("Got request with name : %v", req.Name)
 		messages = append(messages, "Hola "+req.Name)
 	}
 
